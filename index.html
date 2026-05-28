@@ -227,12 +227,12 @@ webkit-playsinline
 
 <script>
 
-/* ИДЕАЛЬНЫЙ СИНХРОН */
+/* ТЕКСТ ПЕСНИ */
 
 const lyricsData = [
 
 {
-    time:0.00,
+    time:2.00,
     text:"В свете фонаря блестит асфальт ✨"
 },
 
@@ -327,7 +327,7 @@ async function startLove(){
     const lyrics =
     document.getElementById("lyrics");
 
-    /* СТАРТ С НУЛЯ */
+    /* СТАРТ С НАЧАЛА */
 
     music.pause();
 
@@ -346,7 +346,7 @@ async function startLove(){
         alert("Нажми ещё раз 💖");
     }
 
-    /* МАКСИМАЛЬНО ТОЧНЫЙ СИНХРОН */
+    /* ИДЕАЛЬНЫЙ СИНХРОН */
 
     function updateLyrics(){
 
