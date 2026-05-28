@@ -115,7 +115,7 @@ h1{
 
     color:#fff0f5;
 
-    min-height:120px;
+    min-height:140px;
 
     opacity:0;
 
@@ -175,33 +175,68 @@ h1{
 
 <script>
 
-/* Слова по времени */
+/* Текст песни */
 
 const lyricsData = [
 
 {
-    text:"Без тебя жизни нет, я не могу найти 💔",
-    time:0
+    time:0,
+    text:"В свете фонаря блестит асфальт ✨"
 },
 
 {
-    text:"Сколько не жмись к стене, сквозь неё не пройти ✨",
-    time:5
+    time:5,
+    text:"Я люблю тебя - ты просто знай 💖"
 },
 
 {
-    text:"Ни одного пути грешной души в зиме 🌙",
-    time:10
+    time:10,
+    text:"Сдаётся мне, теперь это надолго 🌙"
 },
 
 {
-    text:"Без тебя смысла нет, без тебя жизни нет ❤️",
-    time:15
+    time:15,
+    text:"Гори! Гори, не догорай 🔥"
 },
 
 {
-    text:"Люблю тебя моя девочка 💞",
-    time:20
+    time:20,
+    text:"Без тебя жизни нет - я не могу найти 💔"
+},
+
+{
+    time:27,
+    text:"Сколько не жмись к стене, сквозь неё не пройти 🥀"
+},
+
+{
+    time:35,
+    text:"Ни одного пути грешной души в зиме ❄️"
+},
+
+{
+    time:42,
+    text:"Без тебя смысла нет; без тебя жизни нет ❤️"
+},
+
+{
+    time:50,
+    text:"Сколько не жмись к стене, сквозь неё не пройти 🌌"
+},
+
+{
+    time:58,
+    text:"Без тебя жизни нет. Я не могу найти 💞"
+},
+
+{
+    time:65,
+    text:"Ни одного пути грешной души в зиме 🌙"
+},
+
+{
+    time:73,
+    text:"Без тебя смысла нет; без тебя жизни нет 💖"
 }
 
 ];
@@ -222,8 +257,6 @@ async function startLove(){
 
     try{
 
-        /* Важно для телефона */
-
         await music.play();
 
     }catch(err){
@@ -234,24 +267,24 @@ async function startLove(){
 
     lyrics.style.opacity = 1;
 
-    /* Синхрон текста */
-
     music.addEventListener("timeupdate", () => {
 
         const current =
-        Math.floor(music.currentTime);
+        music.currentTime;
 
-        for(let i = 0; i < lyricsData.length; i++){
+        for(
+            let i = lyricsData.length - 1;
+            i >= 0;
+            i--
+        ){
 
-            if(
-                current >= lyricsData[i].time
-            ){
+            if(current >= lyricsData[i].time){
 
                 lyrics.innerText =
                 lyricsData[i].text;
 
+                break;
             }
-
         }
 
     });
