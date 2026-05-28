@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Для Принцессы 💋</title>
+
+<title>Для Принцессы 💖</title>
 
 <style>
 
@@ -11,7 +12,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 body{
@@ -25,44 +26,50 @@ body{
     background:
     linear-gradient(
         135deg,
-        #14070d,
-        #2a0f1c,
-        #12060c
+        #12070c,
+        #2a1020,
+        #0d0509
     );
 
     color:white;
 }
 
 /* Карточка */
-.card{
-    width:90%;
-    max-width:370px;
 
-    text-align:center;
+.card{
+
+    width:90%;
+    max-width:380px;
 
     padding:30px;
+
+    text-align:center;
 
     border-radius:30px;
 
     background:rgba(255,255,255,0.05);
 
-    backdrop-filter:blur(10px);
-
     border:1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(12px);
 
     box-shadow:0 0 40px rgba(0,0,0,0.5);
 
     z-index:2;
 }
 
+/* Заголовок */
+
 h1{
-    color:#ffd1e1;
-    margin-bottom:15px;
     font-size:34px;
+    color:#ffd2e2;
+    margin-bottom:10px;
 }
 
-/* СТИКЕР ПОЦЕЛУЯ */
+/* Поцелуй */
+
 .kiss{
+
     font-size:120px;
 
     cursor:pointer;
@@ -71,12 +78,17 @@ h1{
 
     display:inline-block;
 
-    margin:15px 0;
-
     animation:pulse 2s infinite;
+
+    transition:0.3s;
+}
+
+.kiss:active{
+    transform:scale(0.9);
 }
 
 @keyframes pulse{
+
     0%{
         transform:scale(1);
     }
@@ -88,28 +100,34 @@ h1{
     100%{
         transform:scale(1);
     }
+
 }
 
 /* Текст */
-#lyrics{
-    margin-top:15px;
 
-    font-size:22px;
+#lyrics{
+
+    margin-top:25px;
+
+    font-size:24px;
 
     line-height:1.5;
 
     color:#fff0f5;
 
-    min-height:100px;
+    min-height:120px;
 
     opacity:0;
 
-    transition:1s;
+    transition:0.6s;
 }
 
 /* Сердца */
+
 .heart{
+
     position:absolute;
+
     color:rgba(255,255,255,0.12);
 
     animation:float linear infinite;
@@ -137,89 +155,125 @@ h1{
 </head>
 <body>
 
+<!-- Музыка -->
+
+<audio id="music" preload="auto">
+    <source src="./romans.mp3" type="audio/mpeg">
+</audio>
+
 <div class="card">
 
     <h1>Для Принцессы 💖</h1>
 
-    <!-- Поцелуй -->
     <div class="kiss" onclick="startLove()">
         💋
     </div>
 
-    <!-- Текст -->
-    <div id="lyrics">
-    </div>
+    <div id="lyrics"></div>
 
 </div>
 
 <script>
 
-/* Любовные строки */
-const songs = [
+/* Слова по времени */
 
-"Без тебя жизни нет, я не могу найти ",
+const lyricsData = [
 
-"Сколько не жмись к стене, сквозь неё не пройти ✨",
+{
+    text:"Без тебя жизни нет, я не могу найти 💔",
+    time:0
+},
 
-"Ни одного пути грешной души в зиме 🌙",
+{
+    text:"Сколько не жмись к стене, сквозь неё не пройти ✨",
+    time:5
+},
 
-"Без тебя смысла нет, без тебя жизни нет ❤️",
+{
+    text:"Ни одного пути грешной души в зиме 🌙",
+    time:10
+},
 
-"Ты моя самая любимая девочка 💋"
+{
+    text:"Без тебя смысла нет, без тебя жизни нет ❤️",
+    time:15
+},
+
+{
+    text:"Люблю тебя моя девочка 💞",
+    time:20
+}
 
 ];
 
 let started = false;
 
-function startLove(){
+async function startLove(){
 
     if(started) return;
 
     started = true;
 
-    const lyrics = document.getElementById("lyrics");
+    const music =
+    document.getElementById("music");
 
-    let index = 0;
+    const lyrics =
+    document.getElementById("lyrics");
+
+    try{
+
+        /* Важно для телефона */
+
+        await music.play();
+
+    }catch(err){
+
+        console.log(err);
+
+    }
 
     lyrics.style.opacity = 1;
 
-    lyrics.innerText = songs[index];
+    /* Синхрон текста */
 
-    /* Авто переключение */
-    setInterval(() => {
+    music.addEventListener("timeupdate", () => {
 
-        index++;
+        const current =
+        Math.floor(music.currentTime);
 
-        if(index >= songs.length){
-            index = 0;
+        for(let i = 0; i < lyricsData.length; i++){
+
+            if(
+                current >= lyricsData[i].time
+            ){
+
+                lyrics.innerText =
+                lyricsData[i].text;
+
+            }
+
         }
 
-        lyrics.style.opacity = 0;
+    });
 
-        setTimeout(() => {
-
-            lyrics.innerText = songs[index];
-
-            lyrics.style.opacity = 1;
-
-        }, 500);
-
-    }, 3000);
 }
 
 /* Летающие сердца */
-for(let i = 0; i < 30; i++){
 
-    let heart = document.createElement("div");
+for(let i = 0; i < 35; i++){
+
+    let heart =
+    document.createElement("div");
 
     heart.classList.add("heart");
 
     heart.innerHTML = "❤";
 
-    heart.style.left = Math.random()*100 + "vw";
+    heart.style.left =
+    Math.random()*100 + "vw";
 
     heart.style.fontSize =
-    (15 + Math.random()*25) + "px";
+    (15 + Math.random()*30) + "px";
 
     heart.style.animationDuration =
     (5 + Math.random()*6) + "s";
