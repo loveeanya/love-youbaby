@@ -2,7 +2,11 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
 
 <title>Для Принцессы 💖</title>
 
@@ -12,11 +16,15 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
     font-family:Arial,sans-serif;
 }
 
 body{
+
+    width:100%;
     height:100vh;
+
     overflow:hidden;
 
     display:flex;
@@ -31,6 +39,8 @@ body{
         #0d0509
     );
 
+    position:relative;
+
     color:white;
 }
 
@@ -38,10 +48,10 @@ body{
 
 .card{
 
-    width:90%;
-    max-width:380px;
+    width:92%;
+    max-width:420px;
 
-    padding:30px;
+    padding:28px;
 
     text-align:center;
 
@@ -61,16 +71,19 @@ body{
 /* Заголовок */
 
 h1{
+
     font-size:34px;
+
     color:#ffd2e2;
-    margin-bottom:10px;
+
+    margin-bottom:15px;
 }
 
 /* Поцелуй */
 
 .kiss{
 
-    font-size:120px;
+    font-size:110px;
 
     cursor:pointer;
 
@@ -115,11 +128,36 @@ h1{
 
     color:#fff0f5;
 
-    min-height:140px;
+    min-height:150px;
 
     opacity:0;
 
     transition:0.6s;
+
+    padding:10px;
+}
+
+/* Телефон */
+
+@media(max-width:480px){
+
+    .card{
+        padding:22px;
+    }
+
+    h1{
+        font-size:28px;
+    }
+
+    .kiss{
+        font-size:95px;
+    }
+
+    #lyrics{
+        font-size:20px;
+        min-height:140px;
+    }
+
 }
 
 /* Сердца */
@@ -131,6 +169,8 @@ h1{
     color:rgba(255,255,255,0.12);
 
     animation:float linear infinite;
+
+    pointer-events:none;
 }
 
 @keyframes float{
@@ -155,17 +195,29 @@ h1{
 </head>
 <body>
 
-<!-- Музыка -->
+<!-- МУЗЫКА -->
 
-<audio id="music" preload="auto">
-    <source src="./romans.mp3" type="audio/mpeg">
+<audio
+id="music"
+preload="auto"
+playsinline
+webkit-playsinline
+>
+
+<source src="./romans.mp3" type="audio/mpeg">
+
 </audio>
+
+<!-- КАРТОЧКА -->
 
 <div class="card">
 
     <h1>Для Принцессы 💖</h1>
 
-    <div class="kiss" onclick="startLove()">
+    <div
+    class="kiss"
+    onclick="startLove()"
+    >
         💋
     </div>
 
@@ -175,7 +227,7 @@ h1{
 
 <script>
 
-/* Текст песни */
+/* ТЕКСТ ПЕСНИ */
 
 const lyricsData = [
 
@@ -255,6 +307,14 @@ async function startLove(){
     const lyrics =
     document.getElementById("lyrics");
 
+    /* СТАРТ С НУЛЯ */
+
+    music.pause();
+
+    music.currentTime = 0;
+
+    lyrics.style.opacity = 1;
+
     try{
 
         await music.play();
@@ -263,9 +323,10 @@ async function startLove(){
 
         console.log(err);
 
+        alert("Нажми ещё раз 💖");
     }
 
-    lyrics.style.opacity = 1;
+    /* СИНХРОНИЗАЦИЯ */
 
     music.addEventListener("timeupdate", () => {
 
@@ -291,7 +352,7 @@ async function startLove(){
 
 }
 
-/* Летающие сердца */
+/* СЕРДЦА */
 
 for(let i = 0; i < 35; i++){
 
