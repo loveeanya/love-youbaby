@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Для Принцессы 💋</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    linear-gradient(
+        135deg,
+        #14070d,
+        #2a0f1c,
+        #12060c
+    );
+
+    color:white;
+}
+
+/* Карточка */
+.card{
+    width:90%;
+    max-width:370px;
+
+    text-align:center;
+
+    padding:30px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,0.05);
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    box-shadow:0 0 40px rgba(0,0,0,0.5);
+
+    z-index:2;
+}
+
+h1{
+    color:#ffd1e1;
+    margin-bottom:15px;
+    font-size:34px;
+}
+
+/* СТИКЕР ПОЦЕЛУЯ */
+.kiss{
+    font-size:120px;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    display:inline-block;
+
+    margin:15px 0;
+
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* Текст */
+#lyrics{
+    margin-top:15px;
+
+    font-size:22px;
+
+    line-height:1.5;
+
+    color:#fff0f5;
+
+    min-height:100px;
+
+    opacity:0;
+
+    transition:1s;
+}
+
+/* Сердца */
+.heart{
+    position:absolute;
+    color:rgba(255,255,255,0.12);
+
+    animation:float linear infinite;
+}
+
+@keyframes float{
+
+    0%{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+
+    30%{
+        opacity:0.5;
+    }
+
+    100%{
+        transform:translateY(-10vh);
+        opacity:0;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+
+    <h1>Для Принцессы 💖</h1>
+
+    <!-- Поцелуй -->
+    <div class="kiss" onclick="startLove()">
+        💋
+    </div>
+
+    <!-- Текст -->
+    <div id="lyrics">
+    </div>
+
+</div>
+
+<script>
+
+/* Любовные строки */
+const songs = [
+
+"Без тебя жизни нет, я не могу найти ",
+
+"Сколько не жмись к стене, сквозь неё не пройти ✨",
+
+"Ни одного пути грешной души в зиме 🌙",
+
+"Без тебя смысла нет, без тебя жизни нет ❤️",
+
+"Ты моя самая любимая девочка 💋"
+
+];
+
+let started = false;
+
+function startLove(){
+
+    if(started) return;
+
+    started = true;
+
+    const lyrics = document.getElementById("lyrics");
+
+    let index = 0;
+
+    lyrics.style.opacity = 1;
+
+    lyrics.innerText = songs[index];
+
+    /* Авто переключение */
+    setInterval(() => {
+
+        index++;
+
+        if(index >= songs.length){
+            index = 0;
+        }
+
+        lyrics.style.opacity = 0;
+
+        setTimeout(() => {
+
+            lyrics.innerText = songs[index];
+
+            lyrics.style.opacity = 1;
+
+        }, 500);
+
+    }, 3000);
+}
+
+/* Летающие сердца */
+for(let i = 0; i < 30; i++){
+
+    let heart = document.createElement("div");
+
+    heart.classList.add("heart");
+
+    heart.innerHTML = "❤";
+
+    heart.style.left = Math.random()*100 + "vw";
+
+    heart.style.fontSize =
+    (15 + Math.random()*25) + "px";
+
+    heart.style.animationDuration =
+    (5 + Math.random()*6) + "s";
+
+    document.body.appendChild(heart);
+}
+
+</script>
+
+</body>
+</html>
